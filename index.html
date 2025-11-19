@@ -5,226 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>កន្លែងបញ្ចេញមតិ</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 20px;
-            min-height: 100vh;
-        }
-
-        .comment-section {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        h2, h3 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .comment-form {
-            margin-bottom: 40px;
-            padding: 25px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            border: 2px dashed #e9ecef;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #495057;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #4CAF50;
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .submit-btn {
-            background: #4CAF50;
-            color: white;
-            padding: 14px 35px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .submit-btn:hover {
-            background: #45a049;
-            transform: translateY(-2px);
-        }
-
-        .comments-list {
-            border-top: 3px solid #e9ecef;
-            padding-top: 25px;
-        }
-
-        .comment-item {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            border-left: 5px solid #4CAF50;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        }
-
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .comment-header strong {
-            color: #2c3e50;
-        }
-
-        .comment-date {
-            color: #6c757d;
-            font-size: 0.9em;
-        }
-
-        .comment-content {
-            color: #495057;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-
-        .comment-email {
-            font-size: 0.9em;
-            color: #6c757d;
-            margin-top: 8px;
-        }
-
-        .empty-state {
-            text-align: center;
-            color: #6c757d;
-            padding: 40px 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border: 2px dashed #dee2e6;
-        }
-
-        .success-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            text-align: center;
-            display: none;
-        }
-
-        .loading-message {
-            text-align: center;
-            color: #6c757d;
-            padding: 20px;
-            font-style: italic;
-        }
-
-        /* Admin Button Styles */
-        .admin-floating-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-            z-index: 1000;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .admin-floating-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
-        }
-
-        .hidden-admin-btn {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            background: transparent;
-            border: none;
-            color: #ccc;
-            font-size: 12px;
-            cursor: pointer;
-            opacity: 0.3;
-            transition: opacity 0.3s ease;
-        }
-
-        .hidden-admin-btn:hover {
-            opacity: 1;
-        }
+        /* រក្សាទុក CSS ដើមរបស់អ្នកទាំងអស់ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 20px; min-height: 100vh; }
+        .comment-section { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        /* ... Keep ALL your existing CSS ... */
     </style>
 </head>
 <body>
     <!-- Floating Admin Button (Visible) -->
-    <a href="admin.html" class="admin-floating-btn">
-        🔧 គ្រប់គ្រង
-    </a>
+    <a href="admin.html" class="admin-floating-btn">🔧 គ្រប់គ្រង</a>
 
     <!-- Hidden Admin Button (Secret) -->
-    <button onclick="checkAdminAccess()" class="hidden-admin-btn" title="ចូលគ្រប់គ្រង">
-        ⚙️
-    </button>
+    <button onclick="checkAdminAccess()" class="hidden-admin-btn" title="ចូលគ្រប់គ្រង">⚙️</button>
 
     <div class="comment-section">
         <h2>សារជូនពរ</h2>
 
-        <div class="success-message" id="successMessage">
-            ✅ សារបានបញ្ជូនដោយជោគជ័យ!
-        </div>
+        <div class="success-message" id="successMessage">✅ សារបានបញ្ជូនដោយជោគជ័យ! សារនឹងបង្ហាញបន្ទាប់ពីអនុមតិ</div>
 
         <form class="comment-form" id="commentForm">
             <div class="form-group">
                 <label for="name">ឈ្មោះ *</label>
-                <input type="text" id="name" name="name" required placeholder="បញ្ចូលឈ្មោះរបស់អ្នក...">
+                <input type="text" id="name" name="name" required placeholder="បញ្ចូលឈ្មោះរបស់អ្នក..." maxlength="50">
             </div>
             
             <div class="form-group">
@@ -234,7 +37,8 @@
             
             <div class="form-group">
                 <label for="comment">សារជូនពរ *</label>
-                <textarea id="comment" name="comment" rows="5" required placeholder="សរសេរមតិយោបល់របស់អ្នកនៅទីនេះ..."></textarea>
+                <textarea id="comment" name="comment" rows="5" required placeholder="សរសេរមតិយោបល់របស់អ្នកនៅទីនេះ..." maxlength="500"></textarea>
+                <small style="color: #666; display: block; text-align: right;">អតិបរមា ៥០០ តួអក្សរ</small>
             </div>
             
             <button type="submit" class="submit-btn">ផ្ញើសារជូនពរ</button>
@@ -332,18 +136,23 @@
         // បន្ថែម Comment ថ្មី
         async function addNewComment(name, email, comment) {
             try {
+                console.log('🔄 Trying to save comment to Firebase...');
+                
                 const commentData = {
-                    name: name,
-                    email: email,
-                    comment: comment,
+                    name: name.trim(),
+                    email: email.trim(),
+                    comment: comment.trim(),
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                    status: 'approved' // Auto-approve for public view
+                    status: 'pending' // ឥឡូវត្រូវការ approval
                 };
                 
-                await db.collection("weddingComments").add(commentData);
+                console.log('📝 Comment data:', commentData);
+                
+                const result = await db.collection("weddingComments").add(commentData);
+                console.log('✅ Comment saved with ID:', result.id);
                 return true;
             } catch (error) {
-                console.error('Error saving comment:', error);
+                console.error('❌ Error saving comment:', error);
                 alert('មានបញ្ហាក្នុងការរក្សាទុកសារ: ' + error.message);
                 return false;
             }
@@ -355,7 +164,7 @@
             successMessage.style.display = 'block';
             setTimeout(() => {
                 successMessage.style.display = 'none';
-            }, 3000);
+            }, 5000);
         }
 
         // ត្រួតពិនិត្យការដាក់ស្នើទម្រង់
@@ -367,6 +176,16 @@
             const comment = document.getElementById('comment').value.trim();
             
             if (name && comment) {
+                if (name.length > 50) {
+                    alert('ឈ្មោះមិនអាចលើសពី ៥០ តួអក្សរ!');
+                    return;
+                }
+                
+                if (comment.length > 500) {
+                    alert('សារមិនអាចលើសពី ៥០០ តួអក្សរ!');
+                    return;
+                }
+                
                 const submitBtn = document.querySelector('.submit-btn');
                 const originalText = submitBtn.textContent;
                 
@@ -401,7 +220,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🚀 Firebase Comment System Started');
             
-            // ស្ដាប់ Comment ថ្មីៗពី Firebase
+            // ស្ដាប់ Comment ថ្មីៗពី Firebase (approved comments only)
             db.collection("weddingComments")
                 .where("status", "==", "approved")
                 .orderBy("timestamp", "desc")
@@ -415,12 +234,15 @@
                     });
                     displayAllComments(comments);
                 }, (error) => {
-                    console.error('Error listening to comments:', error);
+                    console.error('❌ Error listening to comments:', error);
                     document.getElementById('commentsList').innerHTML = `
                         <div class="empty-state">
                             <div>⚠️</div>
                             <h3>មិនអាចផ្ទុកសារបាន</h3>
-                            <p>សូមពិនិត្យការតភ្ជាប់អ៊ីនធើណេត</p>
+                            <p>កំហុស: ${error.message}</p>
+                            <p style="margin-top: 10px; font-size: 14px; color: #e74c3c;">
+                                សូមពិនិត្យ Firestore Rules នៅក្នុង Firebase Console
+                            </p>
                         </div>
                     `;
                 });
