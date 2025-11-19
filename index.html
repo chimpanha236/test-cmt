@@ -6,230 +6,37 @@
     <title>កន្លែងសរសេរសារជូនពរ</title>
     <style>
         /* រចនាដូចពីមុន */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #ffe8e8, #f9f3f3);
-            padding: 20px;
-            min-height: 100vh;
-        }
-
-        .comment-section {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.1);
-            border: 2px solid #ff6b6b;
-        }
-
-        h2, h3 {
-            color: #d32f2f;
-            margin-bottom: 20px;
-            text-align: center;
-            font-family: 'Khmer OS', 'Arial', sans-serif;
-        }
-
-        .comment-form {
-            margin-bottom: 40px;
-            padding: 25px;
-            background: #fff5f5;
-            border-radius: 12px;
-            border: 1px solid #ffcdd2;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #c62828;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ffcdd2;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s;
-            background: white;
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #ff6b6b;
-            box-shadow: 0 0 10px rgba(255, 107, 107, 0.2);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .emoji-picker {
-            display: flex;
-            gap: 10px;
-            margin: 10px 0;
-            flex-wrap: wrap;
-        }
-
-        .emoji-picker span {
-            font-size: 20px;
-            cursor: pointer;
-            padding: 5px;
-            transition: transform 0.2s;
-        }
-
-        .emoji-picker span:hover {
-            transform: scale(1.2);
-        }
-
-        .submit-btn {
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.3s;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
-        }
-
-        .comments-list {
-            border-top: 2px solid #ffcdd2;
-            padding-top: 25px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .comment-item {
-            background: #fff9f9;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #ff6b6b;
-            position: relative;
-            animation: fadeIn 0.5s ease-in;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .comment-header strong {
-            color: #d32f2f;
-            font-size: 18px;
-        }
-
-        .comment-date {
-            color: #ff6b6b;
-            font-size: 14px;
-        }
-
-        .comment-content {
-            color: #333;
-            line-height: 1.6;
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
-
-        .comment-actions {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-        }
-
-        .delete-btn {
-            background-color: #f44336;
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        .delete-btn:hover {
-            background-color: #da190b;
-        }
-
-        .success-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-            display: none;
-            border: 1px solid #c3e6cb;
-        }
-
-        .comment-email {
-            font-size: 14px;
-            color: #666;
-            margin-top: 8px;
-        }
-
-        .no-comments {
-            text-align: center;
-            color: #666;
-            font-style: italic;
-            padding: 20px;
-        }
-
-        .loading {
-            text-align: center;
-            color: #666;
-            padding: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .comment-section {
-                padding: 20px;
-                margin: 10px;
-            }
-            
-            .comment-form {
-                padding: 20px;
-            }
-            
-            .comment-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; background: linear-gradient(135deg, #ffe8e8, #f9f3f3); padding: 20px; min-height: 100vh; }
+        .comment-section { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(255, 107, 107, 0.1); border: 2px solid #ff6b6b; }
+        h2, h3 { color: #d32f2f; margin-bottom: 20px; text-align: center; font-family: 'Khmer OS', 'Arial', sans-serif; }
+        .comment-form { margin-bottom: 40px; padding: 25px; background: #fff5f5; border-radius: 12px; border: 1px solid #ffcdd2; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #c62828; }
+        input, textarea { width: 100%; padding: 12px; border: 2px solid #ffcdd2; border-radius: 8px; font-size: 16px; transition: all 0.3s; background: white; }
+        input:focus, textarea:focus { outline: none; border-color: #ff6b6b; box-shadow: 0 0 10px rgba(255, 107, 107, 0.2); }
+        textarea { resize: vertical; min-height: 120px; }
+        .emoji-picker { display: flex; gap: 10px; margin: 10px 0; flex-wrap: wrap; }
+        .emoji-picker span { font-size: 20px; cursor: pointer; padding: 5px; transition: transform 0.2s; }
+        .emoji-picker span:hover { transform: scale(1.2); }
+        .submit-btn { background: linear-gradient(45deg, #ff6b6b, #ff8e8e); color: white; padding: 15px 40px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: all 0.3s; display: block; margin: 0 auto; }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3); }
+        .comments-list { border-top: 2px solid #ffcdd2; padding-top: 25px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .comment-item { background: #fff9f9; padding: 20px; margin-bottom: 20px; border-radius: 10px; border-left: 5px solid #ff6b6b; animation: fadeIn 0.5s ease-in; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .comment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .comment-header strong { color: #d32f2f; font-size: 18px; }
+        .comment-date { color: #ff6b6b; font-size: 14px; }
+        .comment-content { color: #333; line-height: 1.6; margin-bottom: 12px; font-size: 16px; }
+        .comment-actions { display: flex; gap: 10px; justify-content: flex-end; }
+        .delete-btn { background-color: #f44336; color: white; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; transition: all 0.3s; }
+        .delete-btn:hover { background-color: #da190b; }
+        .success-message { background: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; display: none; border: 1px solid #c3e6cb; }
+        .error-message { background: #f8d7da; color: #721c24; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; display: none; border: 1px solid #f5c6cb; }
+        .comment-email { font-size: 14px; color: #666; margin-top: 8px; }
+        .no-comments { text-align: center; color: #666; font-style: italic; padding: 20px; }
+        .loading { text-align: center; color: #666; padding: 20px; }
+        .debug-info { background: #e9ecef; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 12px; color: #666; }
     </style>
 </head>
 <body>
@@ -238,6 +45,10 @@
 
         <div class="success-message" id="successMessage">
             ✅ សារបានបញ្ជូនដោយជោគជ័យ!
+        </div>
+
+        <div class="error-message" id="errorMessage">
+            ❌ មានបញ្ហាក្នុងការផ្ញើសារ!
         </div>
 
         <form class="comment-form" id="commentForm">
@@ -275,15 +86,20 @@
                 មិនទាន់មានសារជូនពរនៅឡើយទេ។ សូមផ្ញើសារជូនពររបស់អ្នកមកជាមុនសិន!
             </div>
         </div>
+
+        <!-- Debug Information -->
+        <div class="debug-info" id="debugInfo" style="display: none;">
+            <strong>Debug Information:</strong>
+            <div id="debugContent"></div>
+        </div>
     </div>
 
     <!-- Firebase SDK Version 9 -->
     <script type="module">
-        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, orderBy, query, where, serverTimestamp, limit } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
-        // Your web app's Firebase configuration
+        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyD_tEDufGFMQRbnV34gkk5w2pEY7Eqysyk",
             authDomain: "test-cmt-2.firebaseapp.com",
@@ -298,20 +114,45 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // ត្រៀមខ្លួនសម្រាប់ប្រើក្នុង global scope
-        window.db = db;
-        window.firestoreFunctions = {
-            collection, addDoc, getDocs, deleteDoc, doc, orderBy, query, where, serverTimestamp, limit
-        };
+        // Debug function
+        function showDebugInfo(message) {
+            console.log('DEBUG:', message);
+            const debugInfo = document.getElementById('debugInfo');
+            const debugContent = document.getElementById('debugContent');
+            debugContent.textContent = message;
+            debugInfo.style.display = 'block';
+        }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        // Show error message
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = '❌ ' + message;
+            errorMessage.style.display = 'block';
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            showDebugInfo('កំពុងចាប់ផ្ដើម...');
+            
             const commentForm = document.getElementById('commentForm');
             const successMessage = document.getElementById('successMessage');
-            const loadingMessage = document.getElementById('loadingMessage');
-            const noComments = document.getElementById('noComments');
 
-            // ផ្ទុក comments ពី Firebase
-            loadCommentsFromFirebase();
+            // Test Firebase connection
+            try {
+                showDebugInfo('កំពុងតេស្តការភ្ជាប់ Firebase...');
+                const testQuery = query(collection(db, "weddingComments"), limit(1));
+                await getDocs(testQuery);
+                showDebugInfo('Firebase ភ្ជាប់បានជោគជ័យ!');
+            } catch (error) {
+                showDebugInfo('បរាជ័យក្នុងការភ្ជាប់ Firebase: ' + error.message);
+                showError('មិនអាចភ្ជាប់ទៅកាន់ database បាន: ' + error.message);
+                return;
+            }
+
+            // Load comments
+            await loadCommentsFromFirebase();
 
             commentForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
@@ -325,49 +166,59 @@
                     submitBtn.disabled = true;
                     submitBtn.textContent = 'កំពុងផ្ញើ...';
                     
-                    // ផ្ញើទៅ Firebase
-                    const success = await addCommentToFirebase(name, email, comment);
+                    showDebugInfo('កំពុងផ្ញើសារ: ' + name);
                     
-                    if (success) {
-                        commentForm.reset();
-                        showSuccessMessage();
-                        // ផ្ទុក comments ឡើងវិញ
-                        await loadCommentsFromFirebase();
-                    } else {
-                        alert('មានបញ្ហាក្នុងការផ្ញើសារ! សូមព្យាយាមម្តងទៀត។');
+                    try {
+                        const success = await addCommentToFirebase(name, email, comment);
+                        
+                        if (success) {
+                            commentForm.reset();
+                            showSuccessMessage();
+                            showDebugInfo('សារបានផ្ញើដោយជោគជ័យ!');
+                            await loadCommentsFromFirebase();
+                        } else {
+                            showError('មិនអាចផ្ញើសារបាន');
+                        }
+                    } catch (error) {
+                        showDebugInfo('កំហុសក្នុងការផ្ញើសារ: ' + error.message);
+                        showError('កំហុស: ' + error.message);
                     }
                     
                     submitBtn.disabled = false;
                     submitBtn.textContent = '📨 ផ្ញើសារជូនពរ';
                 } else {
-                    alert('សូមបំពេញឈ្មោះ និងសារជូនពរ!');
+                    showError('សូមបំពេញឈ្មោះ និងសារជូនពរ!');
                 }
             });
         });
 
-        // មុខងារបន្ថែម comment ទៅ Firebase
         async function addCommentToFirebase(name, email, comment) {
             try {
-                await addDoc(collection(db, "weddingComments"), {
+                showDebugInfo('កំពុងបន្ថែមសារទៅកាន់ Firebase...');
+                
+                const docRef = await addDoc(collection(db, "weddingComments"), {
                     name: name,
                     email: email,
                     comment: comment,
                     timestamp: serverTimestamp(),
                     approved: true
                 });
+                
+                showDebugInfo('សារត្រូវបានបន្ថែមដោយជោគជ័យ! ID: ' + docRef.id);
                 return true;
             } catch (error) {
-                console.error('Error adding comment:', error);
+                showDebugInfo('កំហុសក្នុងការបន្ថែមសារ: ' + error.message);
+                console.error('Error details:', error);
                 return false;
             }
         }
 
-        // មុខងារទាញយក comments ពី Firebase
         async function loadCommentsFromFirebase() {
             try {
+                showDebugInfo('កំពុងផ្ទុកសារពី Firebase...');
+                
                 const q = query(
                     collection(db, "weddingComments"), 
-                    where("approved", "==", true),
                     orderBy("timestamp", "desc"),
                     limit(100)
                 );
@@ -376,7 +227,7 @@
                 const loadingMessage = document.getElementById('loadingMessage');
                 const noComments = document.getElementById('noComments');
                 
-                // សំអាត comments ចាស់
+                // Clear old comments
                 const oldComments = document.querySelectorAll('.comment-item');
                 oldComments.forEach(comment => comment.remove());
                 
@@ -384,10 +235,12 @@
                 
                 if (querySnapshot.empty) {
                     noComments.style.display = 'block';
+                    showDebugInfo('មិនមានសារណាមួយនៅក្នុង database');
                     return;
                 }
                 
                 noComments.style.display = 'none';
+                showDebugInfo('រកឃើញ ' + querySnapshot.size + ' សារ');
                 
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
@@ -401,14 +254,20 @@
                 });
                 
             } catch (error) {
-                console.error('Error loading comments:', error);
-                document.getElementById('loadingMessage').style.display = 'none';
-                document.getElementById('noComments').textContent = 'មានបញ្ហាក្នុងការផ្ទុកសារជូនពរ!';
-                document.getElementById('noComments').style.display = 'block';
+                showDebugInfo('កំហុសក្នុងការផ្ទុកសារ: ' + error.message);
+                console.error('Error details:', error);
+                
+                const loadingMessage = document.getElementById('loadingMessage');
+                const noComments = document.getElementById('noComments');
+                
+                loadingMessage.style.display = 'none';
+                noComments.textContent = 'មានបញ្ហាក្នុងការផ្ទុកសារជូនពរ: ' + error.message;
+                noComments.style.display = 'block';
+                
+                showError('មិនអាចផ្ទុកសារបាន: ' + error.message);
             }
         }
 
-        // មុខងារបង្ហាញ comment
         function displayComment(commentData) {
             const commentsList = document.getElementById('commentsList');
             const commentItem = document.createElement('div');
@@ -439,27 +298,25 @@
             commentsList.insertBefore(commentItem, commentsTitle.nextSibling);
         }
 
-        // មុខងារលុប comment
         window.deleteComment = async function(commentId) {
             if (confirm('តើអ្នកពិតជាចង់លុបសារជូនពរនេះមែនទេ?')) {
                 try {
                     await deleteDoc(doc(db, "weddingComments", commentId));
                     document.getElementById(commentId).remove();
                     
-                    // ពិនិត្យមើលបើគ្មាន comments ទៀតទេ
                     const comments = document.querySelectorAll('.comment-item');
                     if (comments.length === 0) {
                         document.getElementById('noComments').style.display = 'block';
                     }
                     
-                    alert('សារជូនពរត្រូវបានលុបដោយជោគជ័យ!');
+                    showDebugInfo('សារត្រូវបានលុបដោយជោគជ័យ');
                 } catch (error) {
-                    alert('មានបញ្ហាក្នុងការលុបសារ!');
+                    showDebugInfo('កំហុសក្នុងការលុបសារ: ' + error.message);
+                    showError('មិនអាចលុបសារបាន');
                 }
             }
         }
 
-        // មុខងារជួយផ្សេងៗ
         function showSuccessMessage() {
             const successMessage = document.getElementById('successMessage');
             successMessage.style.display = 'block';
