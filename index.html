@@ -34,13 +34,6 @@
             text-align: center;
         }
 
-        h2 {
-            font-size: 2em;
-            background: linear-gradient(45deg, #4CAF50, #2196F3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
         .comment-form {
             margin-bottom: 40px;
             padding: 25px;
@@ -60,11 +53,6 @@
             color: #495057;
         }
 
-        small {
-            color: #6c757d;
-            font-weight: normal;
-        }
-
         input[type="text"],
         input[type="email"],
         textarea {
@@ -74,7 +62,6 @@
             border-radius: 8px;
             font-size: 16px;
             transition: all 0.3s ease;
-            background: white;
         }
 
         input[type="text"]:focus,
@@ -83,17 +70,15 @@
             outline: none;
             border-color: #4CAF50;
             box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
-            transform: translateY(-2px);
         }
 
         textarea {
             resize: vertical;
             min-height: 120px;
-            font-family: inherit;
         }
 
         .submit-btn {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
+            background: #4CAF50;
             color: white;
             padding: 14px 35px;
             border: none;
@@ -107,8 +92,8 @@
         }
 
         .submit-btn:hover {
+            background: #45a049;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
         }
 
         .comments-list {
@@ -123,24 +108,6 @@
             border-radius: 12px;
             border-left: 5px solid #4CAF50;
             box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .comment-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
-        }
-
-        .comment-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #4CAF50, #2196F3);
         }
 
         .comment-header {
@@ -148,37 +115,27 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 10px;
         }
 
         .comment-header strong {
             color: #2c3e50;
-            font-size: 1.1em;
         }
 
         .comment-date {
             color: #6c757d;
             font-size: 0.9em;
-            background: #f8f9fa;
-            padding: 4px 8px;
-            border-radius: 15px;
         }
 
         .comment-content {
             color: #495057;
             line-height: 1.6;
             margin-bottom: 12px;
-            font-size: 1.05em;
-            white-space: pre-wrap;
-            word-wrap: break-word;
         }
 
         .comment-actions {
             display: flex;
             gap: 10px;
             justify-content: flex-end;
-            flex-wrap: wrap;
         }
 
         .edit-btn, .delete-btn, .save-btn, .cancel-btn {
@@ -187,9 +144,7 @@
             border-radius: 6px;
             cursor: pointer;
             font-size: 14px;
-            font-weight: 500;
             transition: all 0.3s ease;
-            min-width: 80px;
         }
 
         .edit-btn {
@@ -199,7 +154,6 @@
 
         .edit-btn:hover {
             background: #e0a800;
-            transform: translateY(-1px);
         }
 
         .delete-btn {
@@ -209,7 +163,6 @@
 
         .delete-btn:hover {
             background: #c82333;
-            transform: translateY(-1px);
         }
 
         .save-btn {
@@ -219,7 +172,6 @@
 
         .save-btn:hover {
             background: #218838;
-            transform: translateY(-1px);
         }
 
         .cancel-btn {
@@ -229,7 +181,6 @@
 
         .cancel-btn:hover {
             background: #5a6268;
-            transform: translateY(-1px);
         }
 
         .edit-textarea {
@@ -241,28 +192,22 @@
             resize: vertical;
             min-height: 100px;
             margin-bottom: 15px;
-            font-family: inherit;
-            background: #f8f9fa;
         }
 
         .success-message {
-            background: linear-gradient(45deg, #d4edda, #c3e6cb);
+            background: #d4edda;
             color: #155724;
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 25px;
             text-align: center;
             display: none;
-            border: 1px solid #c3e6cb;
-            font-weight: bold;
-            box-shadow: 0 3px 10px rgba(21, 87, 36, 0.1);
         }
 
         .comment-email {
             font-size: 0.9em;
             color: #6c757d;
             margin-top: 8px;
-            font-style: italic;
         }
 
         .empty-state {
@@ -273,64 +218,19 @@
             border-radius: 10px;
             border: 2px dashed #dee2e6;
         }
-
-        .empty-state i {
-            font-size: 3em;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .comment-section {
-                padding: 20px;
-                margin: 10px;
-            }
-            
-            .comment-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .comment-actions {
-                justify-content: flex-start;
-                width: 100%;
-            }
-            
-            .edit-btn, .delete-btn, .save-btn, .cancel-btn {
-                flex: 1;
-                min-width: auto;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            
-            .comment-form {
-                padding: 15px;
-            }
-            
-            h2 {
-                font-size: 1.5em;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="comment-section">
-        <h2>🎉 សារជូនពរ</h2>
+        <h2>សារជូនពរ</h2>
 
-        <!-- សារជោគជ័យ -->
         <div class="success-message" id="successMessage">
             ✅ សារបានបញ្ជូនដោយជោគជ័យ!
         </div>
 
-        <!-- សំណុំបែបបទបញ្ចេញមតិ -->
         <form class="comment-form" id="commentForm">
             <div class="form-group">
-                <label for="name">ឈ្មោះ *​ <small>(សូមបញ្ចូលឈ្មោះ លោក/អ្នក ជាមុនសិន)</small></label>
+                <label for="name">ឈ្មោះ *</label>
                 <input type="text" id="name" name="name" required placeholder="បញ្ចូលឈ្មោះរបស់អ្នក...">
             </div>
             
@@ -340,16 +240,15 @@
             </div>
             
             <div class="form-group">
-                <label for="comment">សារជូនពរ * <small>(សូមសរសេរសារជូនពរនៅត្រង់នេះ)</small></label>
+                <label for="comment">សារជូនពរ *</label>
                 <textarea id="comment" name="comment" rows="5" required placeholder="សរសេរមតិយោបល់របស់អ្នកនៅទីនេះ..."></textarea>
             </div>
             
-            <button type="submit" class="submit-btn">📤 ចុចផ្ញើសារជូនពរ</button>
+            <button type="submit" class="submit-btn">ផ្ញើសារជូនពរ</button>
         </form>
         
-        <!-- តារាងមតិយោបល់ -->
         <div class="comments-list" id="commentsList">
-            <h3>💌 សារជូនពរដែលបានផ្ញើរួច</h3>
+            <h3>សារជូនពរដែលបានផ្ញើរួច</h3>
             <!-- មតិថ្មីនឹងបង្ហាញនៅទីនេះ -->
         </div>
     </div>
@@ -359,164 +258,145 @@
         let currentlyEditing = null;
 
         // KEY សម្រាប់ Local Storage
-        const STORAGE_KEY = 'wedding_comments_data';
+        const STORAGE_KEY = 'wedding_comments';
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const commentForm = document.getElementById('commentForm');
-            const commentsList = document.getElementById('commentsList');
-            const successMessage = document.getElementById('successMessage');
-            
-            // ផ្ទុក Comment ពី Local Storage
-            loadCommentsFromStorage();
-            
-            // បន្ថែម Comment គំរូ តែបើមិនទាន់មាន Comment ណាមួយ
-            if (getAllComments().length === 0) {
-                addSampleComments();
-            }
-            
-            // ការដាក់ស្នើទម្រង់
-            commentForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const name = document.getElementById('name').value.trim();
-                const email = document.getElementById('email').value.trim();
-                const comment = document.getElementById('comment').value.trim();
-                
-                if (name && comment) {
-                    // បន្ថែមមតិថ្មី
-                    addNewComment(name, email, comment);
-                    
-                    // សំអាតទម្រង់
-                    commentForm.reset();
-                    
-                    // បង្ហាញសារជោគជ័យ
-                    showSuccessMessage();
-                } else {
-                    alert('សូមបំពេញឈ្មោះ និងសារជូនពរ!');
-                }
-            });
-            
-            function addNewComment(name, email, comment) {
-                const commentData = {
-                    id: 'comment_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
-                    name: name,
-                    email: email,
-                    comment: comment,
-                    date: new Date().toLocaleDateString('km-KH', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    }),
-                    timestamp: new Date().getTime()
-                };
-                
-                // រក្សាទុកក្នុង Local Storage
-                saveCommentToStorage(commentData);
-                
-                // បង្ហាញ Comment ថ្មី
-                displayComment(commentData);
-            }
-            
-            function saveCommentToStorage(commentData) {
-                const comments = getAllComments();
-                comments.unshift(commentData); // ដាក់ Comment ថ្មីនៅលើគេ
+        // មុខងារដើម្បីរក្សាទុក Comment ទៅក្នុង Local Storage
+        function saveComments(comments) {
+            try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+                console.log('✅ Comments saved:', comments);
+            } catch (error) {
+                console.error('❌ Error saving comments:', error);
             }
-            
-            function getAllComments() {
+        }
+
+        // មុខងារដើម្បីអាន Comment ពី Local Storage
+        function loadComments() {
+            try {
                 const stored = localStorage.getItem(STORAGE_KEY);
+                console.log('📖 Loaded from storage:', stored);
                 return stored ? JSON.parse(stored) : [];
+            } catch (error) {
+                console.error('❌ Error loading comments:', error);
+                return [];
+            }
+        }
+
+        // មុខងារបង្ហាញ Comment ទាំងអស់
+        function displayAllComments() {
+            const commentsList = document.getElementById('commentsList');
+            const comments = loadComments();
+            
+            console.log('📝 Displaying comments:', comments);
+            
+            // សម្អាត comments list
+            const existingComments = commentsList.querySelectorAll('.comment-item');
+            existingComments.forEach(comment => comment.remove());
+            
+            // លុប empty state បើមាន
+            const emptyState = commentsList.querySelector('.empty-state');
+            if (emptyState) {
+                emptyState.remove();
             }
             
-            function loadCommentsFromStorage() {
-                const comments = getAllComments();
-                const commentsList = document.getElementById('commentsList');
-                
-                // សម្អាត comments list មុនពេលបង្ហាញ
-                const existingComments = commentsList.querySelectorAll('.comment-item');
-                existingComments.forEach(comment => comment.remove());
-                
-                if (comments.length === 0) {
-                    commentsList.innerHTML += `
-                        <div class="empty-state">
-                            <div>📝</div>
-                            <h3>មិនទាន់មានសារជូនពរ</h3>
-                            <p>សូមជាអ្នកដំបូងដាក់សារជូនពរ!</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                // បង្ហាញ Comment ទាំងអស់
-                comments.forEach(comment => displayComment(comment));
-            }
-            
-            function displayComment(commentData) {
-                const commentsList = document.getElementById('commentsList');
-                const emptyState = commentsList.querySelector('.empty-state');
-                
-                // លុប empty state បើមាន
-                if (emptyState) {
-                    emptyState.remove();
-                }
-                
-                const commentItem = document.createElement('div');
-                commentItem.className = 'comment-item';
-                commentItem.id = commentData.id;
-                
-                commentItem.innerHTML = `
-                    <div class="comment-header">
-                        <strong>👤 ${commentData.name}</strong>
-                        <span class="comment-date">📅 ${commentData.date}</span>
-                    </div>
-                    <p class="comment-content">${commentData.comment}</p>
-                    ${commentData.email ? `<div class="comment-email">📧 អ៊ីមែល: ${commentData.email}</div>` : ''}
-                    <div class="comment-actions">
-                        <button class="edit-btn" onclick="editComment('${commentData.id}')">✏️ កែសម្រួល</button>
-                        <button class="delete-btn" onclick="deleteComment('${commentData.id}')">🗑️ លុប</button>
+            if (comments.length === 0) {
+                commentsList.innerHTML += `
+                    <div class="empty-state">
+                        <div>📝</div>
+                        <h3>មិនទាន់មានសារជូនពរ</h3>
+                        <p>សូមជាអ្នកដំបូងដាក់សារជូនពរ!</p>
                     </div>
                 `;
-                
-                // បន្ថែមមតិថ្មីពីក្រោមក្បាលចំណងជើង
-                const commentsTitle = commentsList.querySelector('h3');
-                commentsList.insertBefore(commentItem, commentsTitle.nextSibling);
+                return;
             }
             
-            function addSampleComments() {
-                const sampleComments = [
-                    {
-                        name: 'សុក្រ័',
-                        email: '',
-                        comment: 'អត្ថបទនេះមានប្រយោជន៍ណាស់! សូមអរគុណសម្រាប់ការចែករំលែក។',
-                        date: '១៥ មករា ២០២៤'
-                    },
-                    {
-                        name: 'វណ្ណា',
-                        email: 'vanna@example.com',
-                        comment: 'ខ្ញុំចង់ដឹងព័ត៌មានបន្ថែមទៀតអំពីប្រធានបទនេះ។',
-                        date: '១៤ មករា ២០២៤'
-                    }
-                ];
-                
-                sampleComments.forEach(comment => {
-                    const commentData = {
-                        ...comment,
-                        id: 'sample_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
-                        timestamp: new Date().getTime() - Math.floor(Math.random() * 1000000000)
-                    };
-                    saveCommentToStorage(commentData);
-                });
-                
-                loadCommentsFromStorage();
-            }
+            // បង្ហាញ Comment គ្រប់មួយ
+            comments.forEach(comment => {
+                displayComment(comment);
+            });
+        }
+
+        // មុខងារបង្ហាញ Comment តែមួយ
+        function displayComment(commentData) {
+            const commentsList = document.getElementById('commentsList');
             
-            function showSuccessMessage() {
-                successMessage.style.display = 'block';
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 3000);
+            const commentItem = document.createElement('div');
+            commentItem.className = 'comment-item';
+            commentItem.id = commentData.id;
+            
+            commentItem.innerHTML = `
+                <div class="comment-header">
+                    <strong>${commentData.name}</strong>
+                    <span class="comment-date">${commentData.date}</span>
+                </div>
+                <p class="comment-content">${commentData.comment}</p>
+                ${commentData.email ? `<div class="comment-email">អ៊ីមែល: ${commentData.email}</div>` : ''}
+                <div class="comment-actions">
+                    <button class="edit-btn" onclick="editComment('${commentData.id}')">កែសម្រួល</button>
+                    <button class="delete-btn" onclick="deleteComment('${commentData.id}')">លុប</button>
+                </div>
+            `;
+            
+            // បន្ថែមមតិថ្មីពីក្រោមក្បាលចំណងជើង
+            const commentsTitle = commentsList.querySelector('h3');
+            commentsList.insertBefore(commentItem, commentsTitle.nextSibling);
+        }
+
+        // មុខងារបន្ថែម Comment ថ្មី
+        function addNewComment(name, email, comment) {
+            const commentData = {
+                id: 'comment_' + Date.now(),
+                name: name,
+                email: email,
+                comment: comment,
+                date: new Date().toLocaleDateString('km-KH', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })
+            };
+            
+            // រក្សាទុកក្នុង Local Storage
+            const comments = loadComments();
+            comments.unshift(commentData); // ដាក់ Comment ថ្មីនៅលើគេ
+            saveComments(comments);
+            
+            // បង្ហាញ Comment ថ្មី
+            displayComment(commentData);
+        }
+
+        // មុខងារបង្ហាញសារជោគជ័យ
+        function showSuccessMessage() {
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+        }
+
+        // ត្រួតពិនិត្យការដាក់ស្នើទម្រង់
+        document.getElementById('commentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const comment = document.getElementById('comment').value.trim();
+            
+            if (name && comment) {
+                // បន្ថែមមតិថ្មី
+                addNewComment(name, email, comment);
+                
+                // សំអាតទម្រង់
+                document.getElementById('commentForm').reset();
+                
+                // បង្ហាញសារជោគជ័យ
+                showSuccessMessage();
+                
+                console.log('✅ New comment added:', { name, email, comment });
+            } else {
+                alert('សូមបំពេញឈ្មោះ និងសារជូនពរ!');
             }
         });
 
@@ -533,20 +413,18 @@
             const actionsElement = commentItem.querySelector('.comment-actions');
             
             // ប្តូរទៅជា mode កែសម្រួល
-            contentElement.outerHTML = `
-                <textarea class="edit-textarea">${originalContent}</textarea>
-            `;
+            contentElement.outerHTML = `<textarea class="edit-textarea">${originalContent}</textarea>`;
             
             actionsElement.innerHTML = `
-                <button class="save-btn" onclick="saveComment('${commentId}')">💾 រក្សាទុក</button>
-                <button class="cancel-btn" onclick="cancelEdit('${commentId}', '${originalContent.replace(/'/g, "\\'")}')">❌ បោះបង់</button>
+                <button class="save-btn" onclick="saveCommentEdit('${commentId}')">រក្សាទុក</button>
+                <button class="cancel-btn" onclick="cancelEdit('${commentId}', '${originalContent.replace(/'/g, "\\'")}')">បោះបង់</button>
             `;
             
             currentlyEditing = commentId;
         }
 
         // រក្សាទុកមតិបន្ទាប់ពីកែសម្រួល
-        function saveComment(commentId) {
+        function saveCommentEdit(commentId) {
             const commentItem = document.getElementById(commentId);
             const textarea = commentItem.querySelector('.edit-textarea');
             const newContent = textarea.value.trim();
@@ -557,7 +435,7 @@
             }
             
             // ធ្វើបច្ចុប្បន្នភាពក្នុង Local Storage
-            const comments = getAllComments();
+            const comments = loadComments();
             const commentIndex = comments.findIndex(c => c.id === commentId);
             
             if (commentIndex !== -1) {
@@ -569,7 +447,7 @@
                     hour: '2-digit',
                     minute: '2-digit'
                 });
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+                saveComments(comments);
             }
             
             // ប្តូរត្រឡប់ទៅ mode ធម្មតា
@@ -577,12 +455,12 @@
             
             const actionsElement = commentItem.querySelector('.comment-actions');
             actionsElement.innerHTML = `
-                <button class="edit-btn" onclick="editComment('${commentId}')">✏️ កែសម្រួល</button>
-                <button class="delete-btn" onclick="deleteComment('${commentId}')">🗑️ លុប</button>
+                <button class="edit-btn" onclick="editComment('${commentId}')">កែសម្រួល</button>
+                <button class="delete-btn" onclick="deleteComment('${commentId}')">លុប</button>
             `;
             
             currentlyEditing = null;
-            alert('✅ មតិត្រូវបានកែសម្រួលដោយជោគជ័យ!');
+            alert('មតិត្រូវបានកែសម្រួលដោយជោគជ័យ!');
         }
 
         // បោះបង់ការកែសម្រួល
@@ -595,8 +473,8 @@
             
             const actionsElement = commentItem.querySelector('.comment-actions');
             actionsElement.innerHTML = `
-                <button class="edit-btn" onclick="editComment('${commentId}')">✏️ កែសម្រួល</button>
-                <button class="delete-btn" onclick="deleteComment('${commentId}')">🗑️ លុប</button>
+                <button class="edit-btn" onclick="editComment('${commentId}')">កែសម្រួល</button>
+                <button class="delete-btn" onclick="deleteComment('${commentId}')">លុប</button>
             `;
             
             currentlyEditing = null;
@@ -606,9 +484,9 @@
         function deleteComment(commentId) {
             if (confirm('តើអ្នកពិតជាចង់លុបមតិនេះមែនទេ?')) {
                 // លុបពី Local Storage
-                const comments = getAllComments();
+                const comments = loadComments();
                 const updatedComments = comments.filter(c => c.id !== commentId);
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedComments));
+                saveComments(updatedComments);
                 
                 // លុបពី DOM
                 const commentItem = document.getElementById(commentId);
@@ -616,18 +494,49 @@
                 
                 // បង្ហាញ empty state បើគ្មាន Comment ទៀត
                 if (updatedComments.length === 0) {
-                    loadCommentsFromStorage();
+                    displayAllComments();
                 }
                 
-                alert('✅ មតិត្រូវបានលុបដោយជោគជ័យ!');
+                alert('មតិត្រូវបានលុបដោយជោគជ័យ!');
             }
         }
 
-        // Helper function to get all comments
-        function getAllComments() {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            return stored ? JSON.parse(stored) : [];
+        // បន្ថែម Comment គំរូ តែបើមិនទាន់មាន Comment ណាមួយ
+        function addSampleCommentsIfEmpty() {
+            const comments = loadComments();
+            if (comments.length === 0) {
+                const sampleComments = [
+                    {
+                        id: 'sample_1',
+                        name: 'សុក្រ័',
+                        email: '',
+                        comment: 'អត្ថបទនេះមានប្រយោជន៍ណាស់! សូមអរគុណសម្រាប់ការចែករំលែក។',
+                        date: '១៥ មករា ២០២៤'
+                    },
+                    {
+                        id: 'sample_2',
+                        name: 'វណ្ណា',
+                        email: 'vanna@example.com',
+                        comment: 'ខ្ញុំចង់ដឹងព័ត៌មានបន្ថែមទៀតអំពីប្រធានបទនេះ។',
+                        date: '១៤ មករា ២០២៤'
+                    }
+                ];
+                
+                sampleComments.forEach(comment => {
+                    comments.push(comment);
+                });
+                
+                saveComments(comments);
+                console.log('✅ Sample comments added');
+            }
         }
+
+        // ចាប់ផ្ដើម Application
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Application started');
+            addSampleCommentsIfEmpty();
+            displayAllComments();
+        });
     </script>
 </body>
 </html>
