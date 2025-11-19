@@ -1,75 +1,256 @@
-document.getElementById('commentForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // យកតម្លៃពីទម្រង់
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const comment = document.getElementById('comment').value;
-    
-    // ពិនិត្យថាតើមានទិន្នន័យគ្រប់គ្រាន់ដែរឬទេ
-    if (!name || !comment) {
-        alert('សូមបំពេញឈ្មោះ និងមតិយោបល់!');
-        return;
-    }
-    
-    // បង្កើតមតិថ្មី
-    addNewComment(name, email, comment);
-    
-    // សំអាតទម្រង់
-    document.getElementById('commentForm').reset();
-});
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyD_tEDufGFMQRbnV34gkk5w2pEY7Eqysyk",
+    authDomain: "test-cmt-2.firebaseapp.com",
+    projectId: "test-cmt-2",
+    storageBucket: "test-cmt-2.firebasestorage.app",
+    messagingSenderId: "586264056540",
+    appId: "1:586264056540:web:33a752e8f5aee76d255a19",
+    measurementId: "G-GHEG5ZR4FY"
+};
 
-function addNewComment(name, email, comment) {
-    const commentsList = document.getElementById('commentsList');
-    
-    // បង្កើតធាតុមតិថ្មី
-    const commentItem = document.createElement('div');
-    commentItem.className = 'comment-item';
-    
-    // បង្កើតកាលបរិច្ឆេទបច្ចុប្បន្ន
-    const now = new Date();
-    const dateString = now.toLocaleDateString('km-KH', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-    });
-    
-    // រចនាសម្ព័ន្ធមតិថ្មី
-    commentItem.innerHTML = `
-        <div class="comment-header">
-            <strong>${name}</strong>
-            <span class="comment-date">${dateString}</span>
-        </div>
-        <p class="comment-content">${comment}</p>
-        ${email ? `<div class="comment-email" style="font-size: 12px; color: #888; margin-top: 5px;">អ៊ីមែល: ${email}</div>` : ''}
-    `;
-    
-    // ស្វែងរកទីតាំងដើម្បីបន្ថែមមតិថ្មី
-    // បន្ថែមមតិថ្មីពីក្រោមក្បាលចំណងជើង "មតិយោបល់"
-    const commentsTitle = commentsList.querySelector('h3');
-    
-    // ប្រសិនបើមានមតិចាស់រួចហើយ，បន្ថែមមតិថ្មីពីលើមតិចាស់ៗ
-    const existingComments = commentsList.querySelectorAll('.comment-item');
-    if (existingComments.length > 0) {
-        // បន្ថែមមតិថ្មីពីលើមតិចាស់ដំបូង
-        commentsList.insertBefore(commentItem, existingComments[0]);
-    } else {
-        // ប្រសិនបើមិនមានមតិចាស់ទេ，បន្ថែមបន្ទាប់ពីក្បាលចំណងជើង
-        commentsList.insertBefore(commentItem, commentsTitle.nextSibling);
-    }
-    
-    // បង្ហាញសារបញ្ចប់
-    alert('មតិរបស់អ្នកត្រូវបានបញ្ជូនដោយជោគជ័យ!');
+// Initialize Firebase
+const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// ===== មុខងារជួយ =====
+
+// បង្ហាញព័ត៌មាន Debug
+function showDebugInfo(message) {
+    console.log('DEBUG:', message);
+    const debugInfo = document.getElementById('debugInfo');
+    const debugContent = document.getElementById('debugContent');
+    debugContent.textContent = message;
+    debugInfo.style.display = 'block';
 }
 
-// បង្កើតមតិគំរូមួយចំនួនសម្រាប់បង្ហាញ
-document.addEventListener('DOMContentLoaded', function() {
-    const sampleComments = [
-        { name: 'សុក្រ័', email: '', comment: 'អត្ថបទនេះមានប្រយោជន៍ណាស់! សូមអរគុណសម្រាប់ការចែករំលែក។' },
-        { name: 'វណ្ណា', email: 'vanna@example.com', comment: 'ខ្ញុំចង់ដឹងព័ត៌មានបន្ថែមទៀតអំពីប្រធានបទនេះ។' }
-    ];
+// បង្ហាញសារបរាជ័យ
+function showError(message) {
+    const errorMessage = document.getElementById('errorMessage');
+    errorMessage.textContent = '❌ ' + message;
+    errorMessage.style.display = 'block';
+    setTimeout(() => {
+        errorMessage.style.display = 'none';
+    }, 5000);
+}
+
+// បង្ហាញសារជោគជ័យ
+function showSuccessMessage() {
+    const successMessage = document.getElementById('successMessage');
+    successMessage.style.display = 'block';
+    setTimeout(() => {
+        successMessage.style.display = 'none';
+    }, 3000);
+}
+
+// ការពារ HTML
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+// បន្ថែម emoji
+function addEmoji(emoji) {
+    const textarea = document.getElementById('comment');
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = textarea.value;
+    const newText = text.substring(0, start) + emoji + text.substring(end);
     
-    sampleComments.forEach(sample => {
-        addNewComment(sample.name, sample.email, sample.comment);
+    textarea.value = newText;
+    textarea.focus();
+    textarea.selectionStart = textarea.selectionEnd = start + emoji.length;
+}
+
+// ===== មុខងារ Firebase =====
+
+// បន្ថែមសារថ្មី
+async function addCommentToFirebase(name, email, comment) {
+    try {
+        showDebugInfo('កំពុងបន្ថែមសារទៅកាន់ Firebase...');
+        
+        await db.collection("weddingComments").add({
+            name: name,
+            email: email,
+            comment: comment,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            approved: true
+        });
+        
+        showDebugInfo('សារត្រូវបានបន្ថែមដោយជោគជ័យ!');
+        return true;
+    } catch (error) {
+        showDebugInfo('កំហុសក្នុងការបន្ថែមសារ: ' + error.message);
+        console.error('Error details:', error);
+        return false;
+    }
+}
+
+// ទាញយកសារពី Firebase
+async function loadCommentsFromFirebase() {
+    try {
+        showDebugInfo('កំពុងផ្ទុកសារពី Firebase...');
+        
+        const querySnapshot = await db.collection("weddingComments")
+            .orderBy("timestamp", "desc")
+            .limit(100)
+            .get();
+        
+        const loadingMessage = document.getElementById('loadingMessage');
+        const noComments = document.getElementById('noComments');
+        
+        // សំអាតសារចាស់
+        const oldComments = document.querySelectorAll('.comment-item');
+        oldComments.forEach(comment => comment.remove());
+        
+        loadingMessage.style.display = 'none';
+        
+        if (querySnapshot.empty) {
+            noComments.style.display = 'block';
+            showDebugInfo('មិនមានសារណាមួយនៅក្នុង database');
+            return;
+        }
+        
+        noComments.style.display = 'none';
+        showDebugInfo('រកឃើញ ' + querySnapshot.size + ' សារ');
+        
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            displayComment({
+                id: doc.id,
+                name: data.name,
+                email: data.email,
+                comment: data.comment,
+                date: data.timestamp?.toDate() || new Date()
+            });
+        });
+        
+    } catch (error) {
+        showDebugInfo('កំហុសក្នុងការផ្ទុកសារ: ' + error.message);
+        console.error('Error details:', error);
+        
+        const loadingMessage = document.getElementById('loadingMessage');
+        const noComments = document.getElementById('noComments');
+        
+        loadingMessage.style.display = 'none';
+        noComments.textContent = 'មានបញ្ហាក្នុងការផ្ទុកសារជូនពរ: ' + error.message;
+        noComments.style.display = 'block';
+        
+        showError('មិនអាចផ្ទុកសារបាន: ' + error.message);
+    }
+}
+
+// បង្ហាញសារនៅលើវេបសាយ
+function displayComment(commentData) {
+    const commentsList = document.getElementById('commentsList');
+    const commentItem = document.createElement('div');
+    commentItem.className = 'comment-item';
+    commentItem.id = commentData.id;
+    
+    const dateString = commentData.date.toLocaleDateString('km-KH', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    
+    commentItem.innerHTML = `
+        <div class="comment-header">
+            <strong>${escapeHtml(commentData.name)}</strong>
+            <span class="comment-date">${dateString}</span>
+        </div>
+        <p class="comment-content">${escapeHtml(commentData.comment)}</p>
+        ${commentData.email ? `<div class="comment-email">អ៊ីមែល: ${escapeHtml(commentData.email)}</div>` : ''}
+        <div class="comment-actions">
+            <button class="delete-btn" onclick="deleteComment('${commentData.id}')">លុប</button>
+        </div>
+    `;
+    
+    const commentsTitle = commentsList.querySelector('h3');
+    commentsList.insertBefore(commentItem, commentsTitle.nextSibling);
+}
+
+// លុបសារ
+async function deleteComment(commentId) {
+    if (confirm('តើអ្នកពិតជាចង់លុបសារជូនពរនេះមែនទេ?')) {
+        try {
+            await db.collection("weddingComments").doc(commentId).delete();
+            document.getElementById(commentId).remove();
+            
+            // ពិនិត្យមើលបើគ្មានសារទៀតទេ
+            const comments = document.querySelectorAll('.comment-item');
+            if (comments.length === 0) {
+                document.getElementById('noComments').style.display = 'block';
+            }
+            
+            showDebugInfo('សារត្រូវបានលុបដោយជោគជ័យ');
+        } catch (error) {
+            showDebugInfo('កំហុសក្នុងការលុបសារ: ' + error.message);
+            showError('មិនអាចលុបសារបាន');
+        }
+    }
+}
+
+// ===== ចាប់ផ្ដើម =====
+document.addEventListener('DOMContentLoaded', async function() {
+    showDebugInfo('កំពុងចាប់ផ្ដើម...');
+    
+    const commentForm = document.getElementById('commentForm');
+
+    // តេស្តការភ្ជាប់ Firebase
+    try {
+        showDebugInfo('កំពុងតេស្តការភ្ជាប់ Firebase...');
+        await db.collection("weddingComments").limit(1).get();
+        showDebugInfo('Firebase ភ្ជាប់បានជោគជ័យ!');
+    } catch (error) {
+        showDebugInfo('បរាជ័យក្នុងការភ្ជាប់ Firebase: ' + error.message);
+        showError('មិនអាចភ្ជាប់ទៅកាន់ database បាន: ' + error.message);
+        return;
+    }
+
+    // ផ្ទុកសារ
+    await loadCommentsFromFirebase();
+
+    // ការដាក់ស្នើទម្រង់
+    commentForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const comment = document.getElementById('comment').value.trim();
+        
+        if (name && comment) {
+            const submitBtn = commentForm.querySelector('.submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'កំពុងផ្ញើ...';
+            
+            showDebugInfo('កំពុងផ្ញើសារ: ' + name);
+            
+            try {
+                const success = await addCommentToFirebase(name, email, comment);
+                
+                if (success) {
+                    commentForm.reset();
+                    showSuccessMessage();
+                    showDebugInfo('សារបានផ្ញើដោយជោគជ័យ!');
+                    await loadCommentsFromFirebase();
+                } else {
+                    showError('មិនអាចផ្ញើសារបាន');
+                }
+            } catch (error) {
+                showDebugInfo('កំហុសក្នុងការផ្ញើសារ: ' + error.message);
+                showError('កំហុស: ' + error.message);
+            }
+            
+            submitBtn.disabled = false;
+            submitBtn.textContent = '📨 ផ្ញើសារជូនពរ';
+        } else {
+            showError('សូមបំពេញឈ្មោះ និងសារជូនពរ!');
+        }
     });
 });
