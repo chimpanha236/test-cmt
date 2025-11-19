@@ -118,7 +118,6 @@ async function addCommentToFirebase(name, email, comment) {
             email: sanitizeInput(email, 100),
             comment: sanitizeInput(comment, 500),
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            // Remove 'approved' field for now to fix the issue
         });
         
         lastSubmissionTime = Date.now();
@@ -137,10 +136,9 @@ async function loadCommentsFromFirebase() {
     try {
         showDebugInfo('កំពុងផ្ទុកសារពី Firebase...');
         
-        // Remove the 'where' clause temporarily to fix the issue
         const querySnapshot = await db.collection("weddingComments")
             .orderBy("timestamp", "desc")
-            .limit(50) // Limit to 50 comments
+            .limit(50)
             .get();
         
         const loadingMessage = document.getElementById('loadingMessage');
@@ -163,6 +161,7 @@ async function loadCommentsFromFirebase() {
         if (noComments) noComments.style.display = 'none';
         showDebugInfo('រកឃើញ ' + querySnapshot.size + ' សារ');
         
+        // ✅ កែត្រង់នេះ៖ បង្ហាញសារថ្មីនៅលើគេបង្អស់
         querySnapshot.forEach((doc) => {
             const data = doc.data();
             displayComment({
@@ -220,6 +219,7 @@ function displayComment(commentData) {
         </div>
     `;
     
+    // ✅ កែត្រង់នេះ៖ បន្ថែមសារថ្មីនៅលើគេបង្អស់ (ក្រោមចំណងជើង)
     const commentsTitle = commentsList.querySelector('h3');
     commentsList.insertBefore(commentItem, commentsTitle.nextSibling);
 }
@@ -301,10 +301,22 @@ document.addEventListener('DOMContentLoaded', async function() {
                     commentForm.reset();
                     showSuccessMessage();
                     showDebugInfo('សារបានផ្ញើដោយជោគជ័យ!');
-                    // Reload comments after 1 second to ensure data is saved
-                    setTimeout(() => {
-                        loadCommentsFromFirebase();
-                    }, 1000);
+                    
+                    // ✅ កែត្រង់នេះ៖ បន្ថែមសារថ្មីភ្លាមៗ មិនចាំបើក loadCommentsFromFirebase()
+                    const newCommentData = {
+                        id: 'temp_' + Date.now(),
+                        name: name,
+                        email: email,
+                        comment: comment,
+                        date: new Date()
+                    };
+                    displayComment(newCommentData);
+                    
+                    // លាក់សារ "គ្មានសារ" បើមាន
+                    const noComments = document.getElementById('noComments');
+                    if (noComments) {
+                        noComments.style.display = 'none';
+                    }
                 }
             } catch (error) {
                 showDebugInfo('កំហុសក្នុងការផ្ញើសារ: ' + error.message);
