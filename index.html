@@ -218,31 +218,57 @@
             border-radius: 10px;
             border: 2px dashed #dee2e6;
         }
-        .admin-floating-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(45deg, #e74c3c, #c0392b);
-    color: white;
-    padding: 12px 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-    z-index: 1000;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
 
-.admin-floating-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
-}
+        /* Admin Button Styles */
+        .admin-floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            z-index: 1000;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .admin-floating-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .hidden-admin-btn {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: transparent;
+            border: none;
+            color: #ccc;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        .hidden-admin-btn:hover {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
+    <!-- Floating Admin Button (Visible) -->
     <a href="admin.html" class="admin-floating-btn">
-    🔧 គ្រប់គ្រង
-</a>
+        🔧 គ្រប់គ្រង
+    </a>
+
+    <!-- Hidden Admin Button (Secret) -->
+    <button onclick="checkAdminAccess()" class="hidden-admin-btn" title="ចូលគ្រប់គ្រង">
+        ⚙️
+    </button>
+
     <div class="comment-section">
         <h2>សារជូនពរ</h2>
 
@@ -523,6 +549,16 @@
             }
         }
 
+        // មុខងារចូលគ្រប់គ្រង
+        function checkAdminAccess() {
+            const password = prompt('បញ្ចូលពាក្យសម្ងាត់គ្រប់គ្រង:');
+            if (password === 'admin123') {
+                window.location.href = 'admin.html';
+            } else {
+                alert('ពាក្យសម្ងាត់មិនត្រឹមត្រូវ!');
+            }
+        }
+
         // បន្ថែម Comment គំរូ តែបើមិនទាន់មាន Comment ណាមួយ
         function addSampleCommentsIfEmpty() {
             const comments = loadComments();
@@ -560,32 +596,5 @@
             displayAllComments();
         });
     </script>
-    <script>
-// បន្ថែមនៅក្នុង index.html របស់អ្នក
-function checkAdminAccess() {
-    const password = prompt('បញ្ចូលពាក្យសម្ងាត់គ្រប់គ្រង:');
-    if (password === 'admin123') {
-        window.location.href = 'admin.html';
-    } else {
-        alert('ពាក្យសម្ងាត់មិនត្រឹមត្រូវ!');
-    }
-}
-</script>
-
-<!-- Button លាក់សម្រាប់ Admin -->
-<button onclick="checkAdminAccess()" 
-        style="position: fixed; bottom: 10px; left: 10px; 
-               background: transparent; border: none; color: #ccc;
-               font-size: 12px; cursor: pointer;">
-    ⚙️
-</button>
-<!-- បន្ថែមកូដនេះនៅកន្លែងណាមួយក្នុង index.html -->
-<div style="text-align: center; margin: 20px 0;">
-    <a href="admin.html" 
-       style="background: #e74c3c; color: white; padding: 10px 20px; 
-              text-decoration: none; border-radius: 5px; font-size: 14px;">
-       🔧 ចូលគ្រប់គ្រងមតិ
-    </a>
-</div>
 </body>
 </html>
